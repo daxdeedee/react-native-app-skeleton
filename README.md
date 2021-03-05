@@ -103,7 +103,7 @@
 
 - **[Context](https://ko.reactjs.org/docs/context.html)**
 - Global Prop Management.
-- This new API solves one major problem–**prop drilling**.
+- Context API solves one major problem–**prop drilling**.
 
 ---
 
