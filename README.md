@@ -1,66 +1,111 @@
-## 프로젝트 생성
+## React Native Skeleton
 
-#### - react-native init React_Native_Skeleton
+> react native app sample Skeleton project
 
-## typescript 설정
+- [React Native Skeleton](#react-native-skeleton)
+  - [Installation](#installation)
+  - [Dependencies](#dependencies)
+  - [Context API](#context-api)
 
+---
+
+### Installation
+
+- [Environment Setup](https://reactnative.dev/docs/environment-setup)
+- Get the project git clone https://github.com/daxdeedee/react-native-app-skeleton.git MyApp
+- `npm install` Install npm dependencies npm install
+- Install pods `cd ios && pod install` you need cocoapods for this to work
+- Make project
+  ```javascript
+  react-native init React_Native_Skeleton
+  // react-native init 'project name'
+  ```
+
+---
+
+### Dependencies
+
+- [typescript](#typescript)
+- [react navigation](#react-navigation)
+- [axios](#axios)
+- [i18next](#i18next)
+- [Dog API](#dog-api)
+
+#### typescript
+
+- **[typescript](https://reactnative.dev/docs/typescript)**
 - Add TypeScript and the types for React Native and Jest to your project.
 - install
+
   - yarn add -D typescript @types/jest @types/react @types/react-native @types/react-test-renderer
 
-* https://reactnative.dev/docs/typescript (참고)
-
-#### Add a TypeScript config file. Create a tsconfig.json in the root of your project
-
-- {
-  "compilerOptions": {
-  "allowJs": true,
-  "allowSyntheticDefaultImports": true,
-  "esModuleInterop": true,
-  "isolatedModules": true,
-  "jsx": "react",
-  "lib": ["es6", "es2017"],
-  "moduleResolution": "node",
-  "noEmit": true,
-  "strict": true,
-  "target": "esnext",
-  "skipLibCheck": true
-  },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
-  }
+- Add a TypeScript config file. Create a tsconfig.json in the root of your project
+  ```javascript
+  {
+    "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["es6", "es2017"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "skipLibCheck": true
+    },
+    "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
+    }
+  ```
 
 #### react navigation
 
-- https://reactnavigation.org/docs/getting-started/ (참고)
-
-1. install - yarn add @react-navigation/native
-2. Installing dependencies into a bare React Native project - yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
-3. move /iOS, input 'pod install'
-
-##### stack-navigator : https://reactnavigation.org/docs/stack-navigator
-
-- install - yarn add @react-navigation/stack
-
-##### material-top-tab-navigator: https://reactnavigation.org/docs/material-top-tab-navigator/
-
-- install - yarn add @react-navigation/material-top-tabs react-native-tab-view
-
-#### Context
+- **[react navigation](https://reactnavigation.org/)**
+- install `yarn add @react-navigation/native`
+- Installing dependencies into a bare React Native project
+  `yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
+- Install pods `cd ios && pod install`
+  <br>
+- **[stack-navigator](https://reactnavigation.org/docs/stack-navigator)**
+- Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
+- install `yarn add @react-navigation/stack`
+  <br>
+- **[material-top-tab-navigator](https://reactnavigation.org/docs/material-top-tab-navigator/)**
+- A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally.
+- install `yarn add @react-navigation/material-top-tabs react-native-tab-view`
 
 #### axios
 
-- for server api
-- install - yarn add axios
-- ApiAxios.ts : axios api
-- ex) ApiDog : sample dog api (https://dog.ceo/dog-api/documentation/)
+- **[axios](https://github.com/axios/axios)**
+- Promise based HTTP client for the browser and node.js
+- install `yarn add axios`
 
-#### 다국어
+#### i18next
 
-- i18next
-  - install - yarn add i18next
-- react-i18next
-  - install - yarn add react-i18next
-- for typescript : yarn add i18next @types/i18next react-i18next @types/react-i18next
+- **[i18next](https://www.i18next.com/)**
+- install `yarn add i18next`
+  <br>
+- **[react-i18next](https://react.i18next.com/)**
+- react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
+- install `yarn add react-i18next`
+- **Need installation for typescript** `yarn add i18next @types/i18next react-i18next @types/react-i18next`
+
+#### Dog Api
+
+- **[Dog API](https://dog.ceo/dog-api/documentation/)**
+- Original dataset taken from the the Stanford Dogs Dataset.
+- used to test axios
+
+---
+
+#### Context API
+
+- **[Context](https://ko.reactjs.org/docs/context.html)**
+- Global Prop Management.
+- This new API solves one major problem–**prop drilling**.
+
+---
 
 #### Error fix
 
