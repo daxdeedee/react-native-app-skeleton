@@ -29,7 +29,6 @@
 - [react navigation](#react-navigation)
 - [axios](#axios)
 - [i18next](#i18next)
-- [Dog API](#dog-api)
 
 #### typescript
 
@@ -65,12 +64,12 @@
 - install `yarn add @react-navigation/native`
 - Installing dependencies into a bare React Native project
   `yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
-- Install pods `cd ios && pod install`
-  <br>
+- Install pods `cd ios && pod install`  
+
 - **[stack-navigator](https://reactnavigation.org/docs/stack-navigator)**
 - Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
-- install `yarn add @react-navigation/stack`
-  <br>
+- install `yarn add @react-navigation/stack`  
+
 - **[material-top-tab-navigator](https://reactnavigation.org/docs/material-top-tab-navigator/)**
 - A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally.
 - install `yarn add @react-navigation/material-top-tabs react-native-tab-view`
@@ -81,21 +80,20 @@
 - Promise based HTTP client for the browser and node.js
 - install `yarn add axios`
 
+- **Dog Api**
+  - **[Dog API](https://dog.ceo/dog-api/documentation/)**
+  - Original dataset taken from the the Stanford Dogs Dataset.
+  - used to test axios
+
 #### i18next
 
 - **[i18next](https://www.i18next.com/)**
 - install `yarn add i18next`
-  <br>
+
 - **[react-i18next](https://react.i18next.com/)**
 - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 - install `yarn add react-i18next`
 - **Need installation for typescript** `yarn add i18next @types/i18next react-i18next @types/react-i18next`
-
-#### Dog Api
-
-- **[Dog API](https://dog.ceo/dog-api/documentation/)**
-- Original dataset taken from the the Stanford Dogs Dataset.
-- used to test axios
 
 ---
 
