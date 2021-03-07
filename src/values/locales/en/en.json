@@ -2,6 +2,7 @@
   "common": {
     "dog_list": "Dog List",
     "dog_image": "Dog Image",
-    "load_image": "Load Image"
+    "load_image": "Load Image",
+    "empty_image": "No image"
   }
 }

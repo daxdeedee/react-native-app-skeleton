@@ -1,20 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 5,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  label: {
-    width: '100%',
-    padding: 5,
-    fontSize: 18,
-  },
-});
+import Colors from '../values/color/Colors';
 
 interface Props {
   title?: string;
@@ -46,7 +33,7 @@ const Button = ({
   borderRadius,
   fontWeights = 'normal',
   disabled = false,
-  borderColor = '#000000',
+  borderColor = Colors.black,
   activeOpacity = 0.5,
   textDecorationLine = 'none',
   textAlign = 'center',
@@ -57,7 +44,7 @@ const Button = ({
         style={[
           styles.button,
           {
-            backgroundColor: disabled ? '#f1f1f1' : bgColor,
+            backgroundColor: disabled ? Colors.gray : bgColor,
             borderWidth: borderWidth,
             width: width,
             height: height,
@@ -79,5 +66,20 @@ const Button = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 5,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  label: {
+    width: '100%',
+    padding: 5,
+    fontSize: 18,
+  },
+});
 
 export default Button;

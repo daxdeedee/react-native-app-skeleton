@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Image, ActivityIndicator } from 'react-native';
+import { Image, ActivityIndicator, Text } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import Colors from '../../../values/color/Colors';
 
@@ -9,6 +10,7 @@ interface IProps {
 }
 
 const DogImage = ({ imageUrl, isLoading }: IProps) => {
+  const { t } = useTranslation();
   const [image, setImage] = useState<string>(imageUrl);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const DogImage = ({ imageUrl, isLoading }: IProps) => {
   ) : image ? (
     <Image source={{ uri: image }} style={{ width: '100%', height: '100%' }} resizeMode={'contain'} fadeDuration={0} />
   ) : (
-    <></>
+    <Text>{t(`common:empty_image`)}</Text>
   );
 };
 
