@@ -15,7 +15,7 @@
 - Get the project git clone https://github.com/daxdeedee/react-native-app-skeleton.git MyApp
 - `npm install` Install npm dependencies npm install
 - Install pods `cd ios && pod install` you need cocoapods for this to work
-- Make project
+- Make new project
   ```javascript
   react-native init React_Native_Skeleton
   // react-native init 'project name'
@@ -103,7 +103,7 @@
 
 - **[Context](https://ko.reactjs.org/docs/context.html)**
 - Global Prop Management.
-- This new API solves one major problem–**prop drilling**.
+- Context API solves one major problem–**prop drilling**.
 
 ---
 
