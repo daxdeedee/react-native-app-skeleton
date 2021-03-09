@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import Colors from '../../../values/color/Colors';
 
 interface IProps {
-  imageUrl: string;
+  imageUrl?: string;
   isLoading: boolean;
 }
 
 const DogImage = ({ imageUrl, isLoading }: IProps) => {
   const { t } = useTranslation();
-  const [image, setImage] = useState<string>(imageUrl);
+  const [image, setImage] = useState<string | undefined>(imageUrl);
 
   useEffect(() => {
     imageUrl && setImage(imageUrl);

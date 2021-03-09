@@ -1,32 +1,39 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 
-import { DogContext } from '../../context/dog/DogContext';
+import { useDispatchContext, useStateContext } from '../../context/dog/DogContext';
+import { dispatchAction } from '../../context/dog/DogDispatch';
 import ItemView from './modules/ItemView';
 import Loading from '../../components/Loading';
 
 const ListView = () => {
-  const { isLoading, dogBreeds, getDogBreeds } = useContext(DogContext);
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+  const getBreeds = () => dispatchAction('GetDogBreeds', dispatch);
+
+  const fetchData = () => {
+    getBreeds();
+  };
 
   useEffect(() => {
-    getDogBreeds();
+    fetchData();
   }, []);
 
   const dogList = useMemo(() => {
     const dogList: JSX.Element[] = [];
-    dogBreeds &&
-      dogBreeds.forEach((breed: string, index) => {
+    state.dogBreeds &&
+      state.dogBreeds.forEach((breed: string, index: any) => {
         breed && dogList.push(<ItemView key={index} text={breed} />);
       });
     return dogList;
-  }, [dogBreeds]);
+  }, [state.dogBreeds]);
 
   return (
     <>
       <View style={{ marginHorizontal: 10 }}>
         <FlatList data={dogList} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => item} />
       </View>
-      {isLoading && <Loading />}
+      {state.loading && <Loading />}
     </>
   );
 };

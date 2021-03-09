@@ -1,52 +1,69 @@
-import React, { useState, createContext } from 'react';
-
-import ApiDog from '../../api/ApiDog';
-
-const defaultContext: IDog = {
-  isLoading: false,
-  dogBreeds: [],
-  randomImage: '',
-  getDogBreeds: () => {},
-  getRandomImage: () => {},
-};
-
-const DogContext = createContext(defaultContext);
+import React, { Dispatch, createContext, useReducer, useContext } from 'react';
 
 interface IProps {
   children: JSX.Element | Array<JSX.Element>;
 }
 
+type action = Dispatch<DogAction>;
+const StateContext = createContext<DogState | undefined>(undefined);
+const DispatchContext = createContext<action | undefined>(undefined);
+
+const defaultRes: DogState = {
+  loading: false,
+  dogBreeds: undefined,
+  randomImage: undefined,
+  error: undefined,
+};
+
+export const dogReducer = (state: DogState, action: DogAction): DogState => {
+  switch (action.type) {
+    case 'Request':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'GetDogBreeds':
+      return {
+        ...state,
+        loading: false,
+        dogBreeds: action.result as string[],
+      };
+    case 'GetRandomImage':
+      return {
+        ...state,
+        loading: false,
+        randomImage: action.result as string,
+      };
+    case 'Fail':
+      return {
+        ...state,
+        loading: false,
+        error: 'Fail',
+      };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+};
+
 const DogContextProvider = ({ children }: IProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [dogBreeds, setDogBreeds] = useState<string[]>();
-  const [randomImage, setRandomImage] = useState<string>('');
-
-  const getDogBreeds = async () => {
-    setIsLoading(true);
-    const res = await ApiDog.getAllBreeds();
-    if (res.ok && res.result) {
-      const getList: Record<string, string[]>[] = res.result.message;
-      getList && setDogBreeds(Object.keys(getList));
-    }
-    setIsLoading(false);
-  };
-
-  const getRandomImage = async () => {
-    setIsLoading(true);
-    const res = await ApiDog.getRandomImage();
-    if (res.ok && res.result) {
-      res.result.message && setRandomImage(res.result.message);
-    } else {
-      return undefined;
-    }
-    setIsLoading(false);
-  };
-
+  const [state, dispatch] = useReducer(dogReducer, defaultRes);
   return (
-    <DogContext.Provider value={{ isLoading, dogBreeds, randomImage, getDogBreeds, getRandomImage }}>
-      {children}
-    </DogContext.Provider>
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
+    </StateContext.Provider>
   );
 };
 
-export { DogContext, DogContextProvider };
+const useStateContext = () => {
+  const state = useContext(StateContext);
+  if (!state) throw new Error('StateContext is undefined!');
+  return state;
+};
+
+const useDispatchContext = () => {
+  const state = useContext(DispatchContext);
+  if (!state) throw new Error('DispatchContext is undefined!');
+  return state;
+};
+
+export { useStateContext, useDispatchContext, DogContextProvider };

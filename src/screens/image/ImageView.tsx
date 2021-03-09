@@ -1,28 +1,31 @@
-import React, { useContext, useState, useMemo } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 import Button from '../../components/Button';
 import DogImage from './modules/DogImage';
 import { useTranslation } from 'react-i18next';
 
-import { DogContext } from '../../context/dog/DogContext';
+import { useDispatchContext, useStateContext } from '../../context/dog/DogContext';
+import { dispatchAction } from '../../context/dog/DogDispatch';
 import Colors from '../../values/color/Colors';
 
 const ImageView = () => {
   const { t } = useTranslation();
-  const { isLoading, randomImage, getRandomImage } = useContext(DogContext);
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+  const getBreeds = () => dispatchAction('GetRandomImage', dispatch);
 
   return (
     <View style={styles.container}>
       <Button
         title={t(`common:load_image`)}
-        onPress={getRandomImage}
+        onPress={getBreeds}
         borderWidth={1}
         borderRadius={10}
         bgColor={Colors.white}
       />
       <View style={styles.imageLayout}>
-        <DogImage imageUrl={randomImage} isLoading={isLoading} />
+        <DogImage imageUrl={state.randomImage} isLoading={state.loading} />
       </View>
     </View>
   );
