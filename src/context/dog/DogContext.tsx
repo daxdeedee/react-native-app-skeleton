@@ -4,41 +4,41 @@ interface IProps {
   children: JSX.Element | Array<JSX.Element>;
 }
 
-type action = Dispatch<DogAction>;
-const StateContext = createContext<DogState | undefined>(undefined);
+type action = Dispatch<IDogAction>;
+const StateContext = createContext<IDogState | undefined>(undefined);
 const DispatchContext = createContext<action | undefined>(undefined);
 
-const defaultRes: DogState = {
+const defaultRes: IDogState = {
   loading: false,
   dogBreeds: undefined,
   randomImage: undefined,
   error: undefined,
 };
 
-export const dogReducer = (state: DogState, action: DogAction): DogState => {
+const dogReducer = (state: IDogState, action: IDogAction): IDogState => {
   switch (action.type) {
     case 'Request':
       return {
         ...state,
-        loading: true,
+        loading: action.loading,
       };
     case 'GetDogBreeds':
       return {
         ...state,
-        loading: false,
+        loading: action.loading,
         dogBreeds: action.result as string[],
       };
     case 'GetRandomImage':
       return {
         ...state,
-        loading: false,
+        loading: action.loading,
         randomImage: action.result as string,
       };
     case 'Fail':
       return {
         ...state,
-        loading: false,
-        error: 'Fail',
+        error: action.error,
+        loading: action.loading,
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
