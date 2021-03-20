@@ -21,7 +21,7 @@ const SignUp = () => {
         <TextInput style={styles.inputText} autoCapitalize="none" secureTextEntry={true} />
       </View>
       <View style={{ alignItems: 'center', marginTop: 20 }}>
-        <Button title={'Sign Up'} borderWidth={1} borderRadius={10} width={200} onPress={onSignUp} />
+        <Button title={'Sign Up'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignUp} />
       </View>
     </View>
   );

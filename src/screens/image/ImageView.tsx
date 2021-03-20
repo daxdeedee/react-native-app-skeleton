@@ -20,9 +20,7 @@ const ImageView = () => {
       <Button
         title={t(`common:load_image`)}
         onPress={getBreeds}
-        borderWidth={1}
-        borderRadius={10}
-        bgColor={Colors.white}
+        buttonStyle={{ borderWidth: 1, borderRadius: 10, backgroundColor: Colors.white }}
       />
       <View style={styles.imageLayout}>
         <DogImage imageUrl={state.randomImage} isLoading={state.loading} />

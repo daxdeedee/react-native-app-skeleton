@@ -29,8 +29,8 @@ const SignIn = () => {
         <TextInput style={styles.inputText} autoCapitalize="none" secureTextEntry={true} onChangeText={setPassword} />
       </View>
       <View style={{ alignItems: 'center', marginTop: 20 }}>
-        <Button title={'Sign In'} borderWidth={1} borderRadius={10} width={200} onPress={onSignIn} />
-        <Button title={'Sign Up'} borderWidth={1} borderRadius={10} width={200} onPress={onSignUp} />
+        <Button title={'Sign In'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignIn} />
+        <Button title={'Sign Up'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignUp} />
       </View>
     </View>
   );
