@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
@@ -9,17 +9,16 @@ import { dogAction } from '../../redux/dog/DogDispatch';
 
 const ListView = () => {
   const { dogBreeds, loading } = useSelector((state: RootState) => state.dogReducer, shallowEqual);
-
   const dispatch = useDispatch();
   const onGetBreeds = () => dogAction('GetDogBreeds', dispatch);
-
-  const fetchData = async () => {
-    await onGetBreeds();
-  };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    await onGetBreeds();
+  };
 
   const dogList = useMemo(() => {
     const dogList: JSX.Element[] = [];

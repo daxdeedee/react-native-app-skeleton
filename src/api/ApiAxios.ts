@@ -59,7 +59,6 @@ export const RequestApi = async (req: IReqObject): Promise<IResponse> => {
     headers: opt.headers,
     method: req.method,
     url: req.url,
-    // responseType: ResponseType.JSON,
     data: opt.body,
     timeout: TIME_OUT,
   })
