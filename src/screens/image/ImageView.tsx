@@ -1,29 +1,29 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import Button from '../../components/Button';
 import DogImage from './modules/DogImage';
 import { useTranslation } from 'react-i18next';
-
-import { useDispatchContext, useStateContext } from '../../context/dog/DogContext';
-import { dispatchAction } from '../../context/dog/DogDispatch';
+import { RootState } from '../../redux/dog';
+import { dogAction } from '../../redux/dog/DogDispatch';
 import Colors from '../../values/color/Colors';
 
 const ImageView = () => {
   const { t } = useTranslation();
-  const state = useStateContext();
-  const dispatch = useDispatchContext();
-  const getBreeds = () => dispatchAction('GetRandomImage', dispatch);
+  const { randomImage, loading } = useSelector((state: RootState) => state.dogReducer, shallowEqual);
+  const dispatch = useDispatch();
+  const onGetImage = () => dogAction('GetRandomImage', dispatch);
 
   return (
     <View style={styles.container}>
       <Button
         title={t(`common:load_image`)}
-        onPress={getBreeds}
+        onPress={onGetImage}
         buttonStyle={{ borderWidth: 1, borderRadius: 10, backgroundColor: Colors.white }}
       />
       <View style={styles.imageLayout}>
-        <DogImage imageUrl={state.randomImage} isLoading={state.loading} />
+        <DogImage imageUrl={randomImage} isLoading={loading} />
       </View>
     </View>
   );

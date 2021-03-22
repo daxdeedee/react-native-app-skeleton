@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch } from 'redux';
 import ApiDog from '../../api/ApiDog';
 
 const onApiCall = async (type: DogApiType, apiPromise: Promise<IResponse>) => {
@@ -15,20 +15,24 @@ const onApiCall = async (type: DogApiType, apiPromise: Promise<IResponse>) => {
   }
 };
 
-export const dispatchAction = async (type: DogApiType, dispatch: Dispatch<IDogAction>) => {
+export const dogAction = async (type: DogApiType, dispatch: Dispatch) => {
   dispatch({ type: 'Request', loading: true, result: undefined, error: undefined });
   try {
     switch (type) {
       case 'GetDogBreeds':
-        const breeds = await onApiCall(type, ApiDog.getAllBreeds());
+        const breeds = await onApiCall('GetDogBreeds', ApiDog.getAllBreeds());
         return dispatch({ ...breeds, type });
       case 'GetRandomImage':
-        const image = await onApiCall(type, ApiDog.getRandomImage());
+        const image = await onApiCall('GetRandomImage', ApiDog.getRandomImage());
         return dispatch({ ...image, type });
+      case 'Request':
+        return dispatch({ type, loading: true, result: undefined });
+      case 'Fail':
+        return dispatch({ type, loading: false, result: undefined, error: 'Fail' });
       default:
         return dispatch({ type: 'Fail', loading: false, result: undefined, error: `Wrong type error : ${type}` });
     }
   } catch (e) {
-    dispatch({ type: 'Fail', loading: false, result: undefined, error: e });
+    return dispatch({ type: 'Fail', loading: false, result: undefined, error: e });
   }
 };
