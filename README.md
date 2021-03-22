@@ -105,6 +105,17 @@
 
 ---
 
+#### Redux
+
+- yarn add @reduxjs/toolkit
+- yarn add redux
+- yarn add react-redux
+- yarn add @types/react-redux (for typescript)
+- yarn add redux-thunk
+- yarn add redux-devtools-extension
+
+---
+
 #### Error fix
 
 - If the following error message appears, change the'gradle' version 6.3.(Target : react-native v0.63)
