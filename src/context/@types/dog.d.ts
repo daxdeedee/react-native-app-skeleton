@@ -1,4 +1,4 @@
-type DogApiType = 'GetDogBreeds' | 'GetRandomImage' | 'Fail' | 'Request';
+type DogApiType = 'GetDogBreeds' | 'GetRandomImage' | 'Fail' | 'Request' | 'useInterceptor' | 'ejectInterceptor';
 
 interface IDogState {
   loading: boolean;

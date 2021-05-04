@@ -7,7 +7,7 @@ import { UserContext } from '../context/user/UserContext';
 const RootNavigation = () => {
   const { email } = useContext(UserContext);
 
-  return <>{email ? <MainNavi /> : <SignInNavi />}</>;
+  return <MainNavi />; //<>{email ? <MainNavi /> : <SignInNavi />}</>;
 };
 
 export default RootNavigation;

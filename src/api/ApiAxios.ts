@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export enum Method {
   GET = 'get',
@@ -28,9 +28,44 @@ interface IReqObject {
 // const HOST_URL = 'https://~~~~~~.com';//My host url
 const TIME_OUT: number = 2500;
 
+const requestInterceptors = () => {
+  return axios.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      console.log(`req config : ${JSON.stringify(config)}`);
+      return config;
+    },
+    (error: any) => {
+      console.log(`req error : ${JSON.stringify(error)}`);
+      return error;
+    },
+  );
+};
+
+const responseInterceptors = () => {
+  return axios.interceptors.response.use(
+    (response: AxiosResponse) => {
+      console.log(`res response : ${JSON.stringify(response)}`);
+      return response;
+    },
+    (error: any) => {
+      console.log(`res error : ${JSON.stringify(error)}`);
+      return error;
+    },
+  );
+};
+
+export const useInterceptors = (type: 'request' | 'response') => {
+  return type === 'request' ? requestInterceptors() : responseInterceptors();
+};
+
+export const ejectInterceptors = (type: 'request' | 'response', interceptorId: number) => {
+  type === 'request'
+    ? axios.interceptors.request.eject(interceptorId)
+    : axios.interceptors.response.eject(interceptorId);
+};
+
 export const RequestApi = async (req: IReqObject): Promise<IResponse> => {
   //   req.url = urlHome + '/api' + req.url;
-
   const opt: RequestInit = {
     method: req.method ? req.method : Method.GET,
     credentials: 'include',
