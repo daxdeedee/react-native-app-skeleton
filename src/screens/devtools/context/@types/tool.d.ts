@@ -1,4 +1,4 @@
-type ToolType = 'axiosLog' | undefined;
+type ToolType = 'axiosLog' | 'resize' | undefined;
 
 interface IDevTool {
   type: ToolType;

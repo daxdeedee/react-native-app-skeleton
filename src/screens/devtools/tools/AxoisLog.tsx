@@ -19,9 +19,9 @@ const AxoisLog = ({ onClose }: IProps) => {
     <View style={styles.container}>
       <Button title={'Close'} onPress={onClose} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
       <ScrollView>
-        <Text style={{ color: '#ffffff' }}>{reqLog}</Text>
+        <Text style={{ color: '#ffffff', fontSize: 10 }}>{reqLog}</Text>
         <Text>------------</Text>
-        <Text style={{ color: '#ffffff' }}>{resLog}</Text>
+        <Text style={{ color: '#ffffff', fontSize: 10 }}>{resLog}</Text>
       </ScrollView>
     </View>
   );

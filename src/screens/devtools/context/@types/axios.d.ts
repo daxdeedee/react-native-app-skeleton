@@ -1,6 +1,6 @@
-interface IAxiosContext {
-  reqLog: string | undefined;
-  resLog: string | undefined;
+interface IAxiosLogContext {
+  reqLog: Array<string>;
+  resLog: Array<string>;
   useInterceptor: () => void;
   ejectInterceptor: () => void;
 }

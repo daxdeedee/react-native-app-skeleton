@@ -1,9 +1,9 @@
 import React, { useState, createContext } from 'react';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const defaultAxiosContext: IAxiosContext = {
-  reqLog: undefined,
-  resLog: undefined,
+const defaultAxiosContext: IAxiosLogContext = {
+  reqLog: [],
+  resLog: [],
   useInterceptor: () => {},
   ejectInterceptor: () => {},
 };
@@ -17,27 +17,25 @@ interface Props {
 const AxiosContextProvider = ({ children }: Props) => {
   const [reqId, setReqId] = useState<number | undefined>(undefined);
   const [resId, setResId] = useState<number | undefined>(undefined);
-  const [reqLog, setReqLog] = useState<string | undefined>(undefined);
-  const [resLog, setResLog] = useState<string | undefined>(undefined);
-  let count = 0;
+  const [reqLog, setReqLog] = useState<Array<string>>([]);
+  const [resLog, setResLog] = useState<Array<string>>([]);
 
-  const getReqLog = (config: AxiosRequestConfig) => {
-    return `Request\nmethod = ${config.method}\nurl = ${config.url}`;
+  const getReqLog = (config: AxiosRequestConfig, isError: boolean = false) => {
+    return `${isError && 'Error! - '}Request\nmethod = ${config.method}\nurl = ${config.url}`;
   };
 
-  const getResLog = (response: AxiosResponse) => {
-    return `Response\ndata = ${JSON.stringify(response.data)}\nstatus = ${response.status}`;
+  const getResLog = (response: AxiosResponse, isError: boolean = false) => {
+    return `${isError && 'Error! - '}Response\ndata = ${JSON.stringify(response.data)}\nstatus = ${response.status}`;
   };
 
   const reqInterceptor = () => {
     return axios.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        console.log(JSON.stringify(config));
-        setReqLog(getReqLog(config));
+        setReqLog((log) => [...log, getReqLog(config)]);
         return config;
       },
       (error: any) => {
-        setReqLog(JSON.stringify(error));
+        setReqLog((log) => [...log, getReqLog(error, true)]);
         return error;
       },
     );
@@ -46,12 +44,11 @@ const AxiosContextProvider = ({ children }: Props) => {
   const resInterceptor = () => {
     return axios.interceptors.response.use(
       (response: AxiosResponse) => {
-        console.log(JSON.stringify(response));
-        setResLog(getResLog(response));
+        setResLog((log) => [...log, getResLog(response)]);
         return response;
       },
       (error: any) => {
-        setResLog(JSON.stringify(error));
+        setResLog((log) => [...log, getResLog(error, true)]);
         return error;
       },
     );

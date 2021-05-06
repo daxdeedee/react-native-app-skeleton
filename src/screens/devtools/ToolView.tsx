@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import Button from '../../components/Button';
 import AxoisLog from './tools/AxoisLog';
+import ResizeView from './tools/ResizeableView';
 import { ToolContext } from './context/toolManager/ToolContext';
 
 const ToolView = () => {
@@ -15,12 +16,18 @@ const ToolView = () => {
     setToolType(undefined);
   };
 
+  const onPressResize = () => {
+    setToolType('resize');
+  };
+
   return (
     <>
       <View style={styles.bar}>
         <Button title={'Log'} onPress={onPressLog} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
+        <Button title={'resize'} onPress={onPressResize} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
       </View>
       {type === 'axiosLog' && <AxoisLog onClose={onCloseLog} />}
+      {type === 'resize' && <ResizeView />}
     </>
   );
 };
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
     top: 0,
     width: '20%',
     height: '100%',
-    backgroundColor: '#22e2ff',
+    backgroundColor: '#919191',
     paddingVertical: 20,
   },
 });
