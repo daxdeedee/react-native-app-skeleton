@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext, useMemo, useCallback } from 'react';
 import { View, Dimensions, StyleSheet, GestureResponderEvent } from 'react-native';
 
 import { ToolContext } from './../context/toolManager/ToolContext';
@@ -14,24 +14,11 @@ interface Props {
 }
 
 const ResizeableView = ({ nowMove = false, layout, move, size }: Props): JSX.Element => {
-  const { setToolType } = React.useContext(ToolContext);
-  const [top, setTop] = React.useState<number>();
-  const [left, setLeft] = React.useState<number>();
-  const [touchX, setTouchX] = React.useState<number>();
-  const [touchY, setTouchY] = React.useState<number>();
+  const { setToolType } = useContext(ToolContext);
 
-  const TopView = () => {
-    return (
-      <View style={styles.topView}>
-        <Button title={'X'} buttonStyle={styles.button} onPress={onClose} />
-        <Button title={'clear'} buttonStyle={styles.button} onPress={onLogClear} />
-      </View>
-    );
-  };
-
-  const moveHandler = () => {
-    // TODO move handler press on top
-  };
+  const [moveOffset, setMoveOffset] = useState<{ x: number; y: number }>();
+  const [moveStart, setMoveStart] = useState<{ x: number; y: number }>();
+  const [translate, setTranslate] = useState<{ x: number; y: number }>();
 
   const sizeHandlerBR = () => {
     // resize press on bottom, right
@@ -46,47 +33,61 @@ const ResizeableView = ({ nowMove = false, layout, move, size }: Props): JSX.Ele
     // TODO clear log
   };
 
-  const responderGrant = (event: GestureResponderEvent) => {
-    // console.log(`rg 00 - ${event.nativeEvent.pageX} , ${event.nativeEvent.pageY}`);
-    // console.log(`rg 01 - ${left} , ${top}`);
-    setTouchX(event.nativeEvent.pageX);
-    setTouchY(event.nativeEvent.pageY);
-  };
+  const onMoveStart = useCallback(
+    (event: GestureResponderEvent) => {
+      setMoveOffset({ x: event.nativeEvent.pageX, y: event.nativeEvent.pageY });
+      translate && setMoveStart({ x: translate.x, y: translate.y });
+    },
+    [moveOffset, moveStart],
+  );
 
-  const responderMove = (event: GestureResponderEvent) => {
-    if (touchY && touchX) {
-      const yy = (top && top > 1) ? top : 0 + (event.nativeEvent.pageY - touchY);
-      const xx = (left && left > 1) ? left : 0 + (event.nativeEvent.pageX - touchX);
+  const onMove = useCallback(
+    (event: GestureResponderEvent) => {
+      if (moveOffset) {
+        const X = moveStart ? moveStart.x : 0;
+        const Y = moveStart ? moveStart.y : 0;
+        const translateX = X + event.nativeEvent.pageX - moveOffset.x;
+        const translateY = Y + event.nativeEvent.pageY - moveOffset.y;
 
-      //   if (xx < 10) {
-      console.log(`-------------------`);
-      console.log(`rm topleft - ${top} , ${left}`);
-      console.log(`rm pageXy - ${event.nativeEvent.pageX} , ${event.nativeEvent.pageY}`);
-      console.log(`rm touchXy - ${event.nativeEvent.pageY - touchY} , ${event.nativeEvent.pageX - touchX}`);
-      console.log(`rm xxyy - ${xx} , ${yy}`);
-      console.log(`-------------------`);
-      //   }
+        setTranslate({ x: translateX, y: translateY });
+      }
+    },
+    [moveOffset, moveStart, translate],
+  );
 
-      setTop(yy);
-      setLeft(xx);
-    }
-  };
+  const onMoveEnd = useCallback(
+    (event: GestureResponderEvent) => {
+      setMoveOffset(undefined);
+      setMoveStart(undefined);
+    },
+    [moveOffset, moveStart],
+  );
 
-  const responderRelease = (event: GestureResponderEvent) => {
-    setTouchX(undefined);
-    setTouchY(undefined);
-  };
+  const TopView = useMemo(() => {
+    return (
+      <View
+        style={styles.topView}
+        onStartShouldSetResponder={(event: GestureResponderEvent) => {
+          return true;
+        }}
+        onResponderGrant={onMoveStart}
+        onResponderMove={onMove}
+        onResponderRelease={onMoveEnd}>
+        <Button title={'X'} buttonStyle={styles.button} onPress={onClose} />
+        <Button title={'clear'} buttonStyle={styles.button} onPress={onLogClear} />
+      </View>
+    );
+  }, [moveOffset, moveStart, translate]);
 
   return (
     <View
-      style={[styles.container, { left, top }]}
-      onStartShouldSetResponder={(event: GestureResponderEvent) => {
-        return true;
-      }}
-      onResponderGrant={responderGrant}
-      onResponderMove={responderMove}
-      onResponderRelease={responderRelease}>
-      {<TopView />}
+      style={[
+        styles.container,
+        {
+          transform: [{ translateX: translate ? translate.x : 0 }, { translateY: translate ? translate.y : 0 }],
+        },
+      ]}>
+      {TopView}
     </View>
   );
 };
