@@ -23,10 +23,21 @@ const ToolView = () => {
   return (
     <>
       <View style={styles.bar}>
-        <Button title={'Log'} onPress={onPressLog} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
-        <Button title={'resize'} onPress={onPressResize} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
+        <Button
+          textStyle={styles.button}
+          title={'Log'}
+          onPress={onPressLog}
+          buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }}
+        />
+        <Button
+          textStyle={styles.button}
+          title={'console.log'}
+          onPress={onPressResize}
+          buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }}
+        />
       </View>
-      {type === 'axiosLog' && <AxoisLog onClose={onCloseLog} />}
+      {type === 'axiosLog' && <ResizeView layout={<AxoisLog onClose={onCloseLog} />} />}
+
       {type === 'resize' && <ResizeView />}
     </>
   );
@@ -41,6 +52,9 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#919191',
     paddingVertical: 20,
+  },
+  button: {
+    fontSize: 10,
   },
 });
 

@@ -17,7 +17,6 @@ const AxoisLog = ({ onClose }: IProps) => {
 
   return (
     <View style={styles.container}>
-      <Button title={'Close'} onPress={onClose} buttonStyle={{ borderWidth: 1, backgroundColor: '#f2f2f2' }} />
       <ScrollView>
         <Text style={{ color: '#ffffff', fontSize: 10 }}>{reqLog}</Text>
         <Text>------------</Text>
@@ -29,13 +28,7 @@ const AxoisLog = ({ onClose }: IProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    position: 'absolute',
-    left: 0,
-    top: 100,
-    width: '70%',
-    height: 300,
-    backgroundColor: '#00000099',
+    flex: 1,
   },
 });
 
