@@ -1,4 +1,4 @@
-import { RequestApi, Method, useInterceptors, ejectInterceptors, InterceptorType } from './ApiAxios';
+import { RequestApi, Method, useInterceptors, ejectInterceptors } from './ApiAxios';
 
 const ApiDog = {
   getAllBreeds: (): Promise<IResponse> => {

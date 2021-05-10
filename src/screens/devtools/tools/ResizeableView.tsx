@@ -131,7 +131,7 @@ const ResizeableView = ({ nowMove = false, layout, move, size }: Props): JSX.Ele
         { bottom, right },
       ]}>
       {TopView}
-      {layout}
+      <View style={{ flex: 1 }}>{layout}</View>
       {ResizeTab}
     </View>
   );
