@@ -20,18 +20,19 @@ const ListView = () => {
   }, []);
 
   const dogList = useMemo(() => {
-    const dogList: JSX.Element[] = [];
-    state.dogBreeds &&
-      state.dogBreeds.forEach((breed: string, index: any) => {
-        breed && dogList.push(<ItemView key={index} text={breed} />);
-      });
-    return dogList;
+    return state.dogBreeds
+      ? state.dogBreeds.map((breed: string, index: any) => {
+          return <ItemView key={index} text={breed} />;
+        })
+      : undefined;
   }, [state.dogBreeds]);
 
   return (
     <>
       <View style={{ marginHorizontal: 10 }}>
-        <FlatList data={dogList} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => item} />
+        {dogList && (
+          <FlatList data={dogList} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => item} />
+        )}
       </View>
       {state.loading && <Loading />}
     </>
