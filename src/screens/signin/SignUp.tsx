@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, SafeAreaView } from 'react-native';
 
 import Button from '../../components/Button';
 
@@ -7,7 +7,7 @@ const SignUp = () => {
   const onSignUp = () => {};
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.itemLayout}>
         <Text style={styles.text}>ID</Text>
         <TextInput style={styles.inputText} />
@@ -23,7 +23,7 @@ const SignUp = () => {
       <View style={{ alignItems: 'center', marginTop: 20 }}>
         <Button title={'Sign Up'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignUp} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

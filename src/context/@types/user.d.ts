@@ -1,4 +1,4 @@
 interface IUserContext {
   email?: string;
-  setSignIn: (email: string) => void;
+  onSignIn: (email: string, pw: string) => void;
 }

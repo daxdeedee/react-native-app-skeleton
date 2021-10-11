@@ -1,8 +1,9 @@
 import React, { useState, createContext } from 'react';
+import { signIn } from '../../api/ApiAccount';
 
 const defaultUserContext: IUserContext = {
   email: undefined,
-  setSignIn: (email: string) => {},
+  onSignIn: (email: string, pw: string) => {},
 };
 
 const UserContext = createContext(defaultUserContext);
@@ -13,16 +14,18 @@ interface Props {
 
 const UserContextProvider = ({ children }: Props) => {
   const [email, setEmail] = useState<string | undefined>(undefined);
-  const setSignIn = (email: string) => {
-    // Signin in your api code
-    setEmail(email);
+
+  const onSignIn = async (email: string, pw: string) => {
+    // Signin in your api code,
+    const res = await signIn(email, pw);
+    setEmail(res?.result);
   };
 
   return (
     <UserContext.Provider
       value={{
         email,
-        setSignIn,
+        onSignIn,
       }}>
       {children}
     </UserContext.Provider>

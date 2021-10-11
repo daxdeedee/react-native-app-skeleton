@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../components/Button';
@@ -7,19 +7,19 @@ import { UserContext } from '../../context/user/UserContext';
 
 const SignIn = () => {
   const navigation = useNavigation();
-  const { setSignIn } = useContext(UserContext);
+  const { onSignIn } = useContext(UserContext);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  const onSignIn = () => {
-    email && setSignIn(email);
+  const handleSignIn = () => {
+    email && password && onSignIn(email, password);
   };
   const onSignUp = () => {
     navigation.navigate('SignUp');
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.itemLayout}>
         <Text style={styles.text}>ID</Text>
         <TextInput style={styles.inputText} onChangeText={setEmail} />
@@ -29,10 +29,14 @@ const SignIn = () => {
         <TextInput style={styles.inputText} autoCapitalize="none" secureTextEntry={true} onChangeText={setPassword} />
       </View>
       <View style={{ alignItems: 'center', marginTop: 20 }}>
-        <Button title={'Sign In'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignIn} />
+        <Button
+          title={'Sign In'}
+          buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }}
+          onPress={handleSignIn}
+        />
         <Button title={'Sign Up'} buttonStyle={{ borderWidth: 1, borderRadius: 10, width: 200 }} onPress={onSignUp} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

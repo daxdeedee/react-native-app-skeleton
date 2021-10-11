@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { SafeAreaView } from 'react-native';
 
 import SignInNavi from './signin/SignInNavi';
 import MainNavi from './main/MainNavi';
