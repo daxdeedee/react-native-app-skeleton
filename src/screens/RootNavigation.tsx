@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
-import { SafeAreaView } from 'react-native';
+import React from 'react';
 
 import SignInNavi from './signin/SignInNavi';
 import MainNavi from './main/MainNavi';
-import { UserContext } from '../context/user/UserContext';
+import { useStateContext } from '../context/user/UserContext';
 
 const RootNavigation = () => {
-  const { email } = useContext(UserContext);
+  const state = useStateContext();
 
-  return <>{email ? <MainNavi /> : <SignInNavi />}</>;
+  return <>{state?.accountInfo?.email ? <MainNavi /> : <SignInNavi />}</>;
 };
 
 export default RootNavigation;

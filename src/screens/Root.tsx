@@ -1,14 +1,14 @@
 import React from 'react';
 
 import RootNavigation from './RootNavigation';
-import { UserContextProvider } from '../context/user/UserContext';
+import { AccountContextProvider } from '../context/user/UserContext';
 
 const Root = () => {
   return (
     <>
-      <UserContextProvider>
+      <AccountContextProvider>
         <RootNavigation />
-      </UserContextProvider>
+      </AccountContextProvider>
     </>
   );
 };

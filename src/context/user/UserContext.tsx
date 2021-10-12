@@ -1,35 +1,62 @@
-import React, { useState, createContext } from 'react';
-import { signIn } from '../../api/ApiAccount';
+import React, { createContext, Dispatch, useReducer, useContext } from 'react';
 
-const defaultUserContext: IUserContext = {
-  email: undefined,
-  onSignIn: (email: string, pw: string) => {},
-};
-
-const UserContext = createContext(defaultUserContext);
-
-interface Props {
+interface IProps {
   children: JSX.Element | Array<JSX.Element>;
 }
 
-const UserContextProvider = ({ children }: Props) => {
-  const [email, setEmail] = useState<string | undefined>(undefined);
+type action = Dispatch<IAccountAction>;
+const StateContext = createContext<IAccountState | undefined>(undefined);
+const DispatchContext = createContext<action | undefined>(undefined);
 
-  const onSignIn = async (email: string, pw: string) => {
-    // Signin in your api code,
-    const res = await signIn(email, pw);
-    setEmail(res?.result);
-  };
+const defaultRes: IAccountState = {
+  accountInfo: undefined,
+  resResult: undefined,
+  error: undefined,
+};
+
+const accountReducer = (state: IAccountState, action: IAccountAction): IAccountState => {
+  switch (action?.type) {
+    case 'SignIn':
+      const email: string = action?.result || '';
+      return {
+        ...state,
+        accountInfo: { email },
+        error: action.error,
+      };
+    case 'Fail':
+      return {
+        ...state,
+        error: action.error,
+      };
+    // need more types
+    default:
+      return {
+        ...state,
+        error: 'unhandled error',
+      };
+  }
+};
+
+const AccountContextProvider = ({ children }: IProps) => {
+  const [state, dispatch] = useReducer(accountReducer, defaultRes);
 
   return (
-    <UserContext.Provider
-      value={{
-        email,
-        onSignIn,
-      }}>
-      {children}
-    </UserContext.Provider>
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
+    </StateContext.Provider>
   );
 };
 
-export { UserContext, UserContextProvider };
+const useStateContext = () => {
+  const state = useContext(StateContext);
+  if (!state) throw new Error('StateContext is undefined!');
+  return state;
+};
+
+const useDispatchContext = () => {
+  const state = useContext(DispatchContext);
+  if (!state) throw new Error('DispatchContext is undefined!');
+  return state;
+};
+
+export { useStateContext, useDispatchContext, AccountContextProvider };

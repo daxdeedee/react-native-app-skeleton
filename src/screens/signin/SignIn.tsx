@@ -1,18 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../components/Button';
-import { UserContext } from '../../context/user/UserContext';
+import { useDispatchContext, useStateContext } from '../../context/user/UserContext';
+import { dispatchAction } from '../../context/user/UseDispatch';
 
 const SignIn = () => {
   const navigation = useNavigation();
-  const { onSignIn } = useContext(UserContext);
+  // const { onSignIn } = useContext(UserContext);
+  const state = useStateContext();
+  const dispatch = useDispatchContext();
+  const onSignIn = (req: any) => dispatchAction('SignIn', dispatch, req);
+
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
   const handleSignIn = () => {
-    email && password && onSignIn(email, password);
+    // email && password && onSignIn(email, password);
+    email && password && onSignIn({ email, password });
   };
   const onSignUp = () => {
     navigation.navigate('SignUp');
