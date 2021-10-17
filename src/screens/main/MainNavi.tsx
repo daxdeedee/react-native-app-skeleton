@@ -20,7 +20,7 @@ const MainNavi = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <DogContextProvider>
         <NavigationContainer>
-          <Text>{state?.accountInfo?.email} 님</Text>
+          <Text style={{ marginLeft: 10 }}>{state?.accountInfo?.email} 님</Text>
           <Tab.Navigator>
             <Tab.Screen name={'ListView'} component={ListView} options={{ tabBarLabel: t(`common:dog_list`) }} />
             <Tab.Screen name={'ImageView'} component={ImageView} options={{ tabBarLabel: t(`common:dog_image`) }} />

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+import Colors from '../../../values/color/Colors';
 
 interface IProps {
   text: string;
@@ -7,9 +8,9 @@ interface IProps {
 
 const ItemView = ({ text }: IProps) => {
   return (
-    <>
-      <Text style={{ borderBottomWidth: 1, paddingVertical: 10 }}>{text}</Text>
-    </>
+    <View style={{ padding: 10, borderColor: Colors.black, borderBottomWidth: 1 }}>
+      <Text style={{ borderBottomWidth: 1 }}>{text}</Text>
+    </View>
   );
 };
 

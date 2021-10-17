@@ -20,16 +20,16 @@ const ListView = () => {
   }, []);
 
   const dogList = useMemo(() => {
-    return state.dogBreeds
-      ? state.dogBreeds.map((breed: string, index: any) => {
-          return <ItemView key={index} text={breed} />;
-        })
-      : undefined;
+    return (
+      state?.dogBreeds?.map((breed: string, index: any) => {
+        return <ItemView key={index} text={breed} />;
+      }) || undefined
+    );
   }, [state.dogBreeds]);
 
   return (
     <>
-      <View style={{ marginHorizontal: 10 }}>
+      <View>
         {dogList && (
           <FlatList data={dogList} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => item} />
         )}
