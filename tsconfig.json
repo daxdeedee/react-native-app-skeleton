@@ -12,9 +12,7 @@
     "target": "esnext",
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["*"],
-      "~/components/*": ["./components/*"],
-      "~/screens/*": ["./screens/*"]
+      "~/*": ["*"]
     },
     "resolveJsonModule": true
   },

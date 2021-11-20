@@ -4,11 +4,7 @@ module.exports = {
     [
       'babel-plugin-root-import',
       {
-        paths: [
-          { rootPathSuffix: '.', rootPathPrefix: '/' },
-          { rootPathPrefix: './src/components', rootPathSuffix: '~/components/*' },
-          { rootPathPrefix: './src/screens', rootPathSuffix: '~/screens/*' },
-        ],
+        paths: [{ rootPathSuffix: './src', rootPathPrefix: '~' }],
       },
     ],
   ],
