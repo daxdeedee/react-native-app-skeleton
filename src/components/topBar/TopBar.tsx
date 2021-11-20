@@ -6,7 +6,6 @@ import Colors from '~/values/color/Colors';
 
 const TopBar = () => {
   const state = useStateContext();
-  // <Text style={{ marginLeft: 10 }}>{state?.accountInfo?.email} 님</Text>
   return (
     <View style={styles.continer}>
       <Image style={styles.icon} source={assets.icon} />
