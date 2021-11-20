@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useStateContext } from '../../context/user/UserContext';
 
 import ListView from '~/screens/list/ListView';
 import ImageView from '~/screens/image/ImageView';
@@ -16,13 +15,11 @@ import { DogContextProvider } from '~/context/dog/DogContext';
 const Tab = createBottomTabNavigator();
 
 const MainNavi = () => {
-  const state = useStateContext();
   const { t } = useTranslation();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <DogContextProvider>
-        {/* <Text style={{ marginLeft: 10 }}>{state?.accountInfo?.email} 님</Text> */}
         <TopBar />
         <NavigationContainer>
           <Tab.Navigator

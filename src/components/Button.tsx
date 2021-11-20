@@ -12,12 +12,8 @@ interface Props {
 
 const Button = ({ title, onPress, activeOpacity = 0.5, disabled = false, buttonStyle, textStyle }: Props) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.button, buttonStyle]}
-        onPress={onPress}
-        disabled={disabled}
-        activeOpacity={activeOpacity}>
+    <View style={[styles.container, buttonStyle]}>
+      <TouchableOpacity style={[styles.button]} onPress={onPress} disabled={disabled} activeOpacity={activeOpacity}>
         <Text style={[styles.label, textStyle]}>{title}</Text>
       </TouchableOpacity>
     </View>
@@ -27,6 +23,7 @@ const Button = ({ title, onPress, activeOpacity = 0.5, disabled = false, buttonS
 const styles = StyleSheet.create({
   container: {
     padding: 5,
+    width: '100%',
   },
   button: {
     alignItems: 'center',

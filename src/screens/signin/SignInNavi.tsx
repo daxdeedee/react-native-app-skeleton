@@ -13,7 +13,7 @@ const SignInNavi = () => {
       <Stack.Navigator
         initialRouteName={'SignIn'}
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           animationEnabled: true,
         }}>
         <Stack.Screen name={'SigIn'} component={SignIn} />
