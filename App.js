@@ -1,8 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import 'react-native-gesture-handler';
-
-import Root from './src/screens/Root';
+import Root from '~/screens/Root';
 
 const App = () => {
   return (

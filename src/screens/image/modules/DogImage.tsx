@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import FastImage from 'react-native-fast-image';
 
-import Colors from '../../../values/color/Colors';
+import Colors from '~/values/color/Colors';
 
 interface IProps {
   imageUrl?: string;

@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import Button from '../../components/Button';
-import DogImage from './modules/DogImage';
+import Button from '~/components/Button';
+import DogImage from '~/screens/image/modules/DogImage';
 import { useTranslation } from 'react-i18next';
-
-import { useDispatchContext, useStateContext } from '../../context/dog/DogContext';
-import { dispatchAction } from '../../context/dog/DogDispatch';
-import Colors from '../../values/color/Colors';
+import { useDispatchContext, useStateContext } from '~/context/dog/DogContext';
+import { dispatchAction } from '~/context/dog/DogDispatch';
+import Colors from '~/values/color/Colors';
 
 const ImageView = () => {
   const { t } = useTranslation();

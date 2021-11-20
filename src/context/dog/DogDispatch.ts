@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import ApiDog from '../../api/ApiDog';
+import ApiDog from '~/api/ApiDog';
 
 const onApiCall = async (type: DogApiType, apiPromise: Promise<IResponse>) => {
   const res = await apiPromise;
