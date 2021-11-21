@@ -6,7 +6,6 @@ import Colors from '~/values/color/Colors';
 
 const TopBar = () => {
   const state = useStateContext();
-  // const navigation = useNavigation();
   return (
     <View style={styles.continer}>
       <Image style={styles.icon} source={assets.icon_light} />
