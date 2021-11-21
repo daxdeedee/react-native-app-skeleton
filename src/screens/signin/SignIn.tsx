@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Button from '../../components/Button';
-import { useDispatchContext, useStateContext } from '../../context/user/UserContext';
-import { dispatchAction } from '../../context/user/UseDispatch';
+import Button from '~/components/Button';
+import { useDispatchContext, useStateContext } from '~/context/user/UserContext';
+import { dispatchAction } from '~/context/user/UseDispatch';
 import assets from '~/assets/assets';
 import EditText from '~/components/EditText';
-import { onChange } from 'react-native-reanimated';
 import Colors from '~/values/color/Colors';
 
 const SignIn = () => {
@@ -28,8 +27,8 @@ const SignIn = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Image style={{ width: '80%', height: 250, marginBottom: 30 }} source={assets.icon} />
+    <SafeAreaView style={styles.container}>
+      <Image style={styles.logo} source={assets.icon_light} />
       <EditText
         bgStyle={styles.input}
         inputStyle={{ fontSize: 20 }}
@@ -60,9 +59,7 @@ const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 10,
-  },
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   itemLayout: {
     marginVertical: 10,
     flexDirection: 'row',
@@ -76,9 +73,10 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     borderBottomWidth: 1,
-    borderColor: '#000000',
+    borderColor: Colors.black,
     marginBottom: 20,
   },
+  logo: { borderRadius: 10, width: '80%', height: 250, marginBottom: 30 },
 });
 
 export default SignIn;

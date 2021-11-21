@@ -11,6 +11,7 @@ import ImageView from '~/screens/image/ImageView';
 import Home from '~/screens/home/Home';
 import TopBar from '~/components/topBar/TopBar';
 import { DogContextProvider } from '~/context/dog/DogContext';
+import MyPage from '~/screens/myPage/MyPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,8 +20,8 @@ const MainNavi = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <TopBar />
       <DogContextProvider>
-        <TopBar />
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={{
@@ -29,6 +30,7 @@ const MainNavi = () => {
             <Tab.Screen name={'HOME'} component={Home} options={{ tabBarLabel: 'Home' }} />
             <Tab.Screen name={'ListView'} component={ListView} options={{ tabBarLabel: t(`common:dog_list`) }} />
             <Tab.Screen name={'ImageView'} component={ImageView} options={{ tabBarLabel: t(`common:dog_image`) }} />
+            <Tab.Screen name={'MyPage'} component={MyPage} options={{ tabBarLabel: 'MyPage' }} />
           </Tab.Navigator>
         </NavigationContainer>
       </DogContextProvider>

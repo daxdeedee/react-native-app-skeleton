@@ -6,11 +6,12 @@ import Colors from '~/values/color/Colors';
 
 const TopBar = () => {
   const state = useStateContext();
+  // const navigation = useNavigation();
   return (
     <View style={styles.continer}>
-      <Image style={styles.icon} source={assets.icon} />
+      <Image style={styles.icon} source={assets.icon_light} />
       <View style={styles.myIcon}>
-        <Text style={{ color: '#ffffff', fontSize: 30 }}>{state?.accountInfo?.email?.charAt(0)}</Text>
+        <Text style={{ color: Colors.white, fontSize: 30 }}>{state?.accountInfo?.email?.charAt(0)}</Text>
       </View>
     </View>
   );
