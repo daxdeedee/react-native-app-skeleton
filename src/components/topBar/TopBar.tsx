@@ -19,7 +19,7 @@ const TopBar = () => {
 
 const styles = StyleSheet.create({
   continer: {
-    backgroundColor: '#000000',
+    backgroundColor: Colors.gray,
     height: 70,
     alignItems: 'center',
     paddingHorizontal: 10,
