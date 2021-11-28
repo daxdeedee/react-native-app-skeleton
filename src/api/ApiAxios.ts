@@ -71,18 +71,18 @@ export const RequestApi = async (req: IReqObject): Promise<IResponse> => {
       };
     })
     .catch((error) => {
-      let result = {
-        ok: false,
-        status: 404,
-        statusText: '',
-        result: '',
-      };
-      if (error?.response) {
-        result.status = error.response.status || 'error';
-        result.statusText = error.response.statusText || 'error';
-        result.result = error.response.data || '';
-      }
-
-      return result;
+      return error?.response
+        ? {
+            ok: false,
+            status: 404,
+            statusText: '',
+            result: '',
+          }
+        : {
+            ok: false,
+            status: error?.response?.status || 'error',
+            statusText: error?.response?.statusText || 'error',
+            result: error?.response?.data || '',
+          };
     });
 };

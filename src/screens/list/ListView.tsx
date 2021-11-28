@@ -1,38 +1,59 @@
 import React, { useEffect, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
 
-import { useDispatchContext, useStateContext } from '../../context/dog/DogContext';
-import { dispatchAction } from '../../context/dog/DogDispatch';
-import ItemView from './modules/ItemView';
-import Loading from '../../components/Loading';
+import { useDispatchContext, useStateContext } from '~/context/dog/DogContext';
+import { dispatchAction } from '~/context/dog/DogDispatch';
+import ItemView from '~/screens/list/modules/ItemView';
+import Loading from '~/components/Loading';
+import InfiniteList, { IpageInfo } from '~/components/InfiniteList';
+
+const defaultPageInfo: IpageInfo = {
+  pageIndex: 0,
+  pageLimit: 10,
+};
 
 const ListView = () => {
   const state = useStateContext();
   const dispatch = useDispatchContext();
   const getBreeds = () => dispatchAction('GetDogBreeds', dispatch);
-
-  const fetchData = () => {
-    getBreeds();
-  };
+  const [dogs, setDogs] = React.useState<string[]>();
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const dogList = useMemo(() => {
-    return state.dogBreeds
-      ? state.dogBreeds.map((breed: string, index: any) => {
-          return <ItemView key={index} text={breed} />;
-        })
-      : undefined;
-  }, [state.dogBreeds]);
+  useEffect(() => {
+    if (state?.dogBreeds && dogs === undefined) {
+      setDogs(state?.dogBreeds.slice(defaultPageInfo.pageIndex, defaultPageInfo.pageLimit));
+    }
+  }, [state]);
+
+  const fetchData = () => {
+    getBreeds();
+  };
+
+  const onPressItem = (name: string) => {
+    console.log('name : ', name);
+  };
+
+  const moreLoad = ({ pageIndex, pageLimit }: { pageIndex: number; pageLimit: number }) => {
+    const result = state?.dogBreeds?.slice(pageIndex * pageLimit, pageIndex * pageLimit + pageLimit);
+    return result;
+  };
 
   return (
     <>
-      <View style={{ marginHorizontal: 10 }}>
-        {dogList && (
-          <FlatList data={dogList} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => item} />
-        )}
+      <View>
+        <InfiniteList
+          initDatas={dogs}
+          renderItem={({ item, index }) => {
+            return <ItemView key={index} text={item} onPressItem={onPressItem} />;
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          onGetData={moreLoad}
+          data={dogs}
+          maxLength={state?.dogBreeds?.length}
+        />
       </View>
       {state.loading && <Loading />}
     </>

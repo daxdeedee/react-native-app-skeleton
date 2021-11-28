@@ -2,8 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from '~/screens/signin/SignIn';
+import SignUp from '~/screens/signin/SignUp';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +13,7 @@ const SignInNavi = () => {
       <Stack.Navigator
         initialRouteName={'SignIn'}
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           animationEnabled: true,
         }}>
         <Stack.Screen name={'SigIn'} component={SignIn} />

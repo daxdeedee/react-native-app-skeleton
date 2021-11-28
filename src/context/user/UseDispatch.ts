@@ -1,6 +1,6 @@
 // action -> dispatcher -> store -> view
 import { Dispatch } from 'react';
-import { signIn } from '../../api/ApiAccount';
+import { signIn } from '~/api/ApiAccount';
 
 const onApiCall = async (type: AccountApiType, onApi: Promise<IResponse>) => {
   const res = await onApi;

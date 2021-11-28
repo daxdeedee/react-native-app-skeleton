@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import FastImage from 'react-native-fast-image';
 
-import Colors from '../../../values/color/Colors';
+import Colors from '~/values/color/Colors';
 
 interface IProps {
   imageUrl?: string;
@@ -21,10 +21,17 @@ const DogImage = ({ imageUrl, isLoading }: IProps) => {
   return isLoading ? (
     <ActivityIndicator size="large" color={Colors.blue} />
   ) : image ? (
-    <FastImage source={{ uri: image }} style={{ width: '100%', height: '100%' }} resizeMode={'contain'} />
+    <FastImage source={{ uri: image }} style={styles.image} resizeMode={'contain'} />
   ) : (
     <Text>{t(`common:empty_image`)}</Text>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default DogImage;
