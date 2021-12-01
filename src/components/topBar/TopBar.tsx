@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import assets from '~/assets/assets';
-import { useStateContext } from '~/context/user/UserContext';
 import Colors from '~/values/color/Colors';
+import { useSelector, shallowEqual } from 'react-redux';
 
 const TopBar = () => {
-  const state = useStateContext();
+  const { accountInfo } = useSelector((state: any) => state.auth, shallowEqual);
   return (
     <View style={styles.continer}>
       <Image style={styles.icon} source={assets.icon_light} />
       <View style={styles.myIcon}>
-        <Text style={{ color: Colors.white, fontSize: 30 }}>{state?.accountInfo?.email?.charAt(0)}</Text>
+        <Text style={{ color: Colors.white, fontSize: 30 }}>{accountInfo?.charAt(0)}</Text>
       </View>
     </View>
   );

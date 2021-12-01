@@ -19,6 +19,7 @@
     "@types/react-i18next": "^8.1.0",
     "axios": "^0.21.1",
     "i18next": "^19.9.1",
+    "immer": "^9.0.7",
     "react": "16.13.1",
     "react-i18next": "^11.8.8",
     "react-native": "0.63.4",
@@ -27,7 +28,10 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.18.0",
-    "react-native-tab-view": "^2.15.2"
+    "react-native-tab-view": "^2.15.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

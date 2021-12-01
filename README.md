@@ -64,11 +64,11 @@
 - install `yarn add @react-navigation/native`
 - Installing dependencies into a bare React Native project
   `yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
-- Install pods `cd ios && pod install`  
+- Install pods `cd ios && pod install`
 
 - **[stack-navigator](https://reactnavigation.org/docs/stack-navigator)**
 - Provides a way for your app to transition between screens where each new screen is placed on top of a stack.
-- install `yarn add @react-navigation/stack`  
+- install `yarn add @react-navigation/stack`
 
 - **[material-top-tab-navigator](https://reactnavigation.org/docs/material-top-tab-navigator/)**
 - A material-design themed tab bar on the top of the screen that lets you switch between different routes by tapping the tabs or swiping horizontally.
@@ -97,11 +97,26 @@
 
 ---
 
+### Redux, Redux-thunk
+
+- npm install --save react-redux
+- State management lib.
+- It looks like FLUX pattern
+- redux-thunk used for asynchronous processing
+
+---
+
 #### Context API
 
 - **[Context](https://ko.reactjs.org/docs/context.html)**
 - Global Prop Management.
 - Context API solves one major problem–**prop drilling**.
+
+---
+
+### immer
+
+- Used to maintain immutability
 
 ---
 

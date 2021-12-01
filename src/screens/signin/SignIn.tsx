@@ -3,24 +3,22 @@ import { View, Text, TextInput, Image, StyleSheet, SafeAreaView } from 'react-na
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '~/components/Button';
-import { useDispatchContext, useStateContext } from '~/context/user/UserContext';
-import { dispatchAction } from '~/context/user/UseDispatch';
 import assets from '~/assets/assets';
 import EditText from '~/components/EditText';
 import Colors from '~/values/color/Colors';
 
+import { useDispatch } from 'react-redux';
+import { getAuthInfo } from '~/reducer/Action';
+
 const SignIn = () => {
+  const reduxDispatch = useDispatch();
   const navigation = useNavigation();
-  // const { onSignIn } = useContext(UserContext);
-  const state = useStateContext();
-  const dispatch = useDispatchContext();
-  const onSignIn = (req: any) => dispatchAction('SignIn', dispatch, req);
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
   const handleSignIn = () => {
-    email && password && onSignIn({ email, password });
+    email && password && reduxDispatch(getAuthInfo({ email, pw: password }));
   };
   const onSignUp = () => {
     navigation.navigate('SignUp');
