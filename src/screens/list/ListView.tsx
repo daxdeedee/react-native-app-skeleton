@@ -7,6 +7,26 @@ import ItemView from '~/screens/list/modules/ItemView';
 import Loading from '~/components/Loading';
 import InfiniteList, { IpageInfo } from '~/components/InfiniteList';
 
+type test = {
+  aa: string;
+};
+
+interface Itest {
+  aa: string;
+}
+
+interface Itest {
+  bb: string;
+}
+
+const aa: test = {
+  aa: 'sss',
+};
+
+const bb: Itest = {
+  aa: 'sss',
+};
+
 const defaultPageInfo: IpageInfo = {
   pageIndex: 0,
   pageLimit: 10,
